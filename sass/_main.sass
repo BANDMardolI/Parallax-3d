@@ -1,0 +1,83 @@
+@mixin layer($image, $pos, $size)
+    background-image: url('../img/' + $image)
+    transform: translateZ($pos) scale($size)
+
+:root
+    --index: calc( 1vw + 1vh)
+    --transition: 1.5 cubic-bezier(.05, .5, 0, 1)
+
+body
+    background-color: #000
+    color: #fff
+    font-family: kamerik-3d
+
+.logo
+    width: calc(var(--index) * 7.8)
+    height: calc(var(--index) * 7.8)   
+    background-repeat: no-repeat 
+    position: absolute
+    left: calc(50% - (var(--index) * 7.8) / 2) 
+    top: calc(var(--index) * 2.8)
+    z-index: 1
+
+.layers
+    perspective: 1000px
+    overflow: hidden
+    .layers__container
+        height: 100vh
+        transform-style: preserve-3d
+        transform: rotateX(var(--move-y)) rotateY(var(--move-x))
+        transition: transform var(--transition)
+        min-height: 500px
+        .layers__item
+            position: absolute
+            inset: -5vw
+            background-size: cover
+            background-position: center
+            display: flex
+            align-items: center
+            justify-content: center
+
+.layer-1
+    @include layer('layer-1.jpg', -55px, 1.06)
+.layer-2
+    @include layer('layer-2.png', 80px, .88)
+.layer-3
+    @include layer('none', 180px, .8)
+.layer-4
+    @include layer('none', 190px, .9)
+    pointer-events: none
+.layer-5
+    @include layer('layer-5.png', 300px, .9)
+    pointer-events: none
+.layer-6
+    @include layer('layer-6.png', 380px, .88)
+    pointer-events: none
+
+.hero_content
+    font-size: calc(var(--index) * 2.9)
+    text-align: center
+    text-transform: uppercase
+    letter-spacing: calc(var(--index) * -.15)
+    line-height: 1.35em
+    margin-top: calc(var(--index) * 5.5)
+    span
+        display: block
+    p
+        text-transform: none
+        font-family: merriweather-3d
+        letter-spacing: normal
+        font-size: calc(var(--index) * 1)
+    button
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif
+        font-weight: 600
+        text-transform: uppercase
+        font-size: calc(var(--index) * .71)
+        padding: calc(var(--index) * .7) calc(var(--index) * 1.25)
+        background-color: transparent
+        color: #fff
+        border: rgba(255, 255, 255, .4) solid 3px
+        border-radius: 10em
+        outline: none
+        cursor: pointer
+        z-index: 1
